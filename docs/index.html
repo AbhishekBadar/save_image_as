@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Save Image As...</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1a1a2e;
+      background: #f8f9fb;
+      line-height: 1.7;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #6C5CE7, #0984E3);
+      color: #fff;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 15px;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: -32px auto 48px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 40px 36px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: #6C5CE7;
+    }
+
+    p, li {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #999;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    a {
+      color: #0984E3;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container { margin: -24px 12px 32px; padding: 28px 20px; }
+      .header { padding: 36px 16px; }
+      .header h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Save Image As... — Privacy Policy</h1>
+    <p>Chrome Extension</p>
+  </div>
+
+  <div class="container">
+    <h2>Overview</h2>
+    <p>
+      "Save Image As..." is a Chrome extension that allows users to convert and download images
+      from web pages in various formats (PNG, JPG, WebP). Your privacy is important to us.
+      This policy explains what data the extension accesses and how it is handled.
+    </p>
+
+    <h2>Data Collection</h2>
+    <p>
+      <strong>We do not collect, store, transmit, or share any personal data.</strong>
+    </p>
+    <p>
+      The extension does not use analytics, tracking, cookies, or any third-party services.
+      There are no user accounts, no sign-ins, and no servers involved.
+    </p>
+
+    <h2>What the Extension Accesses</h2>
+    <p>The extension accesses the following data solely to perform its core functionality:</p>
+    <ul>
+      <li><strong>Images on the current web page</strong> — to convert and download them when you explicitly request it via the right-click menu or the toolbar popup.</li>
+      <li><strong>Image URLs</strong> — to fetch image data for format conversion. URLs are used locally and are never transmitted anywhere.</li>
+    </ul>
+
+    <h2>Permissions Used</h2>
+    <ul>
+      <li><strong>contextMenus</strong> — to add the "Save Image As..." right-click menu.</li>
+      <li><strong>downloads</strong> — to save converted images to your computer.</li>
+      <li><strong>activeTab</strong> — to access images on the currently active tab when triggered by the user.</li>
+      <li><strong>notifications</strong> — to show success or error messages after save/copy operations.</li>
+      <li><strong>Host permissions (all URLs)</strong> — the content script needs to run on any webpage so it can access and convert images when you trigger the extension. It only activates on explicit user action.</li>
+    </ul>
+
+    <h2>How Data is Processed</h2>
+    <p>
+      All image processing (format conversion, resizing) happens entirely within your browser
+      using the HTML5 Canvas API. No image data is ever sent to any external server.
+      Converted images are saved directly to your local downloads folder.
+    </p>
+
+    <h2>Third-Party Services</h2>
+    <p>
+      This extension does not use any third-party services, APIs, libraries, or SDKs.
+      It contains no ads and no affiliate links.
+    </p>
+
+    <h2>Data Storage</h2>
+    <p>
+      The extension does not store any data persistently. It does not use
+      <code>chrome.storage</code>, <code>localStorage</code>, cookies, or any other
+      storage mechanism. Each operation is independent and stateless.
+    </p>
+
+    <h2>Children's Privacy</h2>
+    <p>
+      This extension does not knowingly collect any information from children under 13.
+      It does not collect information from anyone.
+    </p>
+
+    <h2>Changes to This Policy</h2>
+    <p>
+      If this privacy policy is updated, the changes will be posted on this page
+      with a revised date below.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      If you have questions about this privacy policy, you can open an issue on the
+      <a href="https://github.com/AbhishekBadar/save_image_as/issues">GitHub repository</a>.
+    </p>
+
+    <p class="updated">Last updated: February 23, 2026</p>
+  </div>
+
+</body>
+</html>
