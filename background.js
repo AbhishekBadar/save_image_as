@@ -39,6 +39,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: "Copy as PNG",
     contexts: ["image"],
   });
+
 });
 
 const FORMAT_MAP = {

@@ -7,9 +7,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (message.action === "getAllImages") {
-    const images = getAllImages();
-    sendResponse({ images });
-    return;
+    scrollAndCollectImages()
+      .then((images) => sendResponse({ images }))
+      .catch(() => sendResponse({ images: getAllImages() }));
+    return true;
   }
 
   if (message.action === "copyImage") {
@@ -19,6 +20,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 });
+
+async function scrollAndCollectImages() {
+  const originalScroll = window.scrollY;
+  const scrollStep = window.innerHeight;
+  const maxHeight = document.body.scrollHeight;
+  const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  // Scroll through the entire page to trigger lazy-loaded images
+  for (let y = 0; y < maxHeight; y += scrollStep) {
+    window.scrollTo(0, y);
+    await delay(150);
+  }
+  // Scroll to bottom to catch the last batch
+  window.scrollTo(0, maxHeight);
+  await delay(300);
+
+  // Restore original scroll position
+  window.scrollTo(0, originalScroll);
+
+  return getAllImages();
+}
 
 function getAllImages() {
   const seen = new Set();
@@ -62,7 +84,29 @@ function getAllImages() {
   return results;
 }
 
+const MIME_TO_EXTENSIONS = {
+  "image/png": ["png"],
+  "image/jpeg": ["jpg", "jpeg"],
+  "image/webp": ["webp"],
+};
+
+function sourceMatchesTarget(url, targetMime) {
+  try {
+    const ext = new URL(url).pathname.split(".").pop().toLowerCase();
+    return MIME_TO_EXTENSIONS[targetMime]?.includes(ext) || false;
+  } catch {
+    return false;
+  }
+}
+
 async function convertImage(url, mime) {
+  // If source format matches target, download the original file as-is (no re-encoding)
+  if (sourceMatchesTarget(url, mime)) {
+    const blob = await fetchImage(url);
+    return blobToDataUrl(blob);
+  }
+
+  // Otherwise, convert through canvas
   const blob = await fetchImage(url);
   const bitmap = await createImageBitmap(blob);
 
@@ -70,7 +114,7 @@ async function convertImage(url, mime) {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(bitmap, 0, 0);
 
-  const quality = mime === "image/png" ? undefined : 0.92;
+  const quality = mime === "image/png" ? undefined : 0.95;
   const outputBlob = await canvas.convertToBlob({ type: mime, quality });
 
   return blobToDataUrl(outputBlob);
@@ -132,3 +176,4 @@ function blobToDataUrl(blob) {
     reader.readAsDataURL(blob);
   });
 }
+

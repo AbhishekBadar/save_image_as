@@ -17,6 +17,7 @@ const formatSelect = document.getElementById("format");
 // Initialize
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   tabId = tabs[0].id;
+  contentEl.innerHTML = '<div class="loading">Scrolling page to find all images...</div>';
   chrome.tabs.sendMessage(tabId, { action: "getAllImages" }, (response) => {
     if (chrome.runtime.lastError || !response?.images) {
       contentEl.innerHTML = '<div class="empty">Could not scan page. Try refreshing.</div>';
